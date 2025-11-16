@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog de la Serie Mundial - Ejercicios JS & AJAX</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Estilos adicionales para los ejercicios */
+        .ejercicios-section {
+            padding: 2rem 0;
+            background: var(--white);
+            margin: 2rem 0;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .ejercicios-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .ejercicio {
+            background: var(--light);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .ejercicio h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .form-group input, 
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus, 
+        .form-group textarea:focus {
+            border-color: var(--accent);
+            outline: none;
+        }
+
+        .btn {
+            background: var(--accent);
+            color: var(--white);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: var(--secondary);
+        }
+
+        .resultado {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: var(--white);
+            border-radius: 5px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .ajax-section {
+            background: var(--light);
+            padding: 2rem;
+            border-radius: 10px;
+            margin: 2rem 0;
+        }
+
+        .ajax-controls {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .estados, .cabeceras, .codigo-estado {
+            background: var(--white);
+            padding: 1rem;
+            border-radius: 5px;
+            margin: 1rem 0;
+            min-height: 60px;
+        }
+
+        .contenido-respuesta {
+            background: var(--white);
+            padding: 1rem;
+            border-radius: 5px;
+            margin: 1rem 0;
+            min-height: 100px;
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+        }
+
+        .vocales-resultado {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .vocal-item {
+            background: var(--primary);
+            color: var(--white);
+            padding: 0.5rem;
+            text-align: center;
+            border-radius: 5px;
+        }
+
+        .vocal-count {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .ajax-controls {
+                grid-template-columns: 1fr;
+            }
+            
+            .vocales-resultado {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">⚾ Blog de la Serie Mundial</div>
+            <nav class="nav">
+                <ul>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#ejercicios-js">Ejercicios JS</a></li>
+                    <li><a href="#ejercicios-ajax">Ejercicios AJAX</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h2>Ejercicios JavaScript & AJAX</h2>
+            <p>Implementación de algoritmos y peticiones asíncronas</p>
+        </div>
+    </section>
+
+    <main class="container">
+        <!-- SECCIÓN EJERCICIOS JAVASCRIPT -->
+        <section id="ejercicios-js" class="ejercicios-section">
+            <div class="ejercicios-container">
+                <h2 style="text-align: center; color: var(--primary); margin-bottom: 2rem;">Ejercicios JavaScript</h2>
+                
+                <!-- Ejercicio 1: Palíndromo -->
+                <div class="ejercicio">
+                    <h3>1. Verificador de Palíndromos</h3>
+                    <div class="form-group">
+                        <label for="palindromoInput">Ingresa una palabra o frase:</label>
+                        <input type="text" id="palindromoInput" placeholder="Ej: anita lava la tina">
+                    </div>
+                    <button class="btn" onclick="verificarPalindromo()">Verificar Palíndromo</button>
+                    <div id="resultadoPalindromo" class="resultado"></div>
+                </div>
+
+                <!-- Ejercicio 2: Número Mayor -->
+                <div class="ejercicio">
+                    <h3>2. Comparador de Números</h3>
+                    <div class="form-group">
+                        <label for="numero1">Primer número:</label>
+                        <input type="number" id="numero1" placeholder="Ingresa un número">
+                    </div>
+                    <div class="form-group">
+                        <label for="numero2">Segundo número:</label>
+                        <input type="number" id="numero2" placeholder="Ingresa otro número">
+                    </div>
+                    <button class="btn" onclick="compararNumeros()">Comparar Números</button>
+                    <div id="resultadoNumeros" class="resultado"></div>
+                </div>
+
+                <!-- Ejercicio 3: Vocales que Aparecen -->
+                <div class="ejercicio">
+                    <h3>3. Vocales en una Frase</h3>
+                    <div class="form-group">
+                        <label for="fraseVocales">Ingresa una frase:</label>
+                        <input type="text" id="fraseVocales" placeholder="Ej: El rápido murciélago hindú">
+                    </div>
+                    <button class="btn" onclick="mostrarVocales()">Mostrar Vocales</button>
+                    <div id="resultadoVocales" class="resultado"></div>
+                </div>
+
+                <!-- Ejercicio 4: Conteo de Vocales -->
+                <div class="ejercicio">
+                    <h3>4. Contador de Vocales</h3>
+                    <div class="form-group">
+                        <label for="fraseContarVocales">Ingresa una frase:</label>
+                        <input type="text" id="fraseContarVocales" placeholder="Ej: La serpiente silba suavemente">
+                    </div>
+                    <button class="btn" onclick="contarVocales()">Contar Vocales</button>
+                    <div id="resultadoContarVocales" class="resultado"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECCIÓN EJERCICIOS AJAX -->
+        <section id="ejercicios-ajax" class="ejercicios-section">
+            <div class="ejercicios-container">
+                <h2 style="text-align: center; color: var(--primary); margin-bottom: 2rem;">Ejercicios AJAX</h2>
+                
+                <div class="ajax-section">
+                    <div class="form-group">
+                        <label for="urlInput">URL para la petición AJAX:</label>
+                        <div class="ajax-controls">
+                            <input type="text" id="urlInput" placeholder="https://ejemplo.com">
+                            <button class="btn" onclick="mostrarContenidos()">Mostrar Contenidos</button>
+                        </div>
+                    </div>
+
+                    <!-- Estados de la petición -->
+                    <div class="form-group">
+                        <label>Estados de la petición:</label>
+                        <div id="estadosPeticion" class="estados">No iniciada</div>
+                    </div>
+
+                    <!-- Cabeceras HTTP -->
+                    <div class="form-group">
+                        <label>Cabeceras HTTP de la respuesta:</label>
+                        <div id="cabecerasRespuesta" class="cabeceras"></div>
+                    </div>
+
+                    <!-- Código de estado -->
+                    <div class="form-group">
+                        <label>Código de estado:</label>
+                        <div id="codigoEstado" class="codigo-estado"></div>
+                    </div>
+
+                    <!-- Contenidos -->
+                    <div class="form-group">
+                        <label>Contenidos de la respuesta:</label>
+                        <div id="contenidosRespuesta" class="contenido-respuesta"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Blog de la Serie Mundial - Ejercicios JavaScript & AJAX</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
